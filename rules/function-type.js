@@ -56,5 +56,8 @@ module.exports.schema = [{
         'anonymous'
     ]
 }, {
-    type: 'array'
+    type: 'array',
+    items: {
+        type: 'string'
+    }
 }];
