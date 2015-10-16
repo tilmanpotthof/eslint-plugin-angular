@@ -1,5 +1,7 @@
 /**
  * Watch and On methods on the scope object should be assigned to a variable, in order to be deleted in a $destroy event handler
+ *
+ * @linkDescription require `$on` and `$watch` deregistration callbacks to be saved in a variable
  */
 'use strict';
 
@@ -49,10 +51,6 @@ module.exports = function(context) {
      * argument of the string '$destroy'.
      */
     function isFirstArgDestroy(node) {
-        if (node.type !== 'CallExpression') {
-            return false;
-        }
-
         var args = node.arguments;
 
         return (args.length >= 1 &&
