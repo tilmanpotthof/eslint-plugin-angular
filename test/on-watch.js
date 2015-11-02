@@ -1,13 +1,15 @@
-//------------------------------------------------------------------------------
+'use strict';
+
+// ------------------------------------------------------------------------------
 // Requirements
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
-var rule = require('../rules/on-watch'),
-    RuleTester = require("eslint").RuleTester;
+var rule = require('../rules/on-watch');
+var RuleTester = require('eslint').RuleTester;
 
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 // Tests
-//------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------
 
 var eslintTester = new RuleTester();
 
@@ -28,11 +30,17 @@ eslintTester.run('on-watch', rule, {
         'scope.$on()',
         'scope.$watch()',
         '$scope.$on()',
-        '$scope.$watch()'
+        '$scope.$watch()',
+
+        // false positive check
+        '$on()',
+
+        // uncovered edgecase
+        '$scope["$on"]()'
 
     ],
     invalid: [
-        { code: '$rootScope.$on()', errors: [{ message: 'The "$on" call should be assigned to a variable, in order to be destroyed during the $destroy event'}] },
-        { code: '$rootScope.$watch()', errors: [{ message: 'The "$watch" call should be assigned to a variable, in order to be destroyed during the $destroy event'}] }
+        {code: '$rootScope.$on()', errors: [{message: 'The "$on" call should be assigned to a variable, in order to be destroyed during the $destroy event'}]},
+        {code: '$rootScope.$watch()', errors: [{message: 'The "$watch" call should be assigned to a variable, in order to be destroyed during the $destroy event'}]}
     ]
 });
