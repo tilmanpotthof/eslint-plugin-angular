@@ -1,6 +1,7 @@
 'use strict';
 
 var noop = require('lodash').noop;
+var MATCHING_FILE_SETTINGS_PROPERTY = 'angular/only-lint-matching-filenames';
 
 function Rule(name, config) {
     this.name = name;
@@ -8,17 +9,30 @@ function Rule(name, config) {
     this._requireRule = require('../' + this.name);
 }
 
+function _wrapRuleWithSettingsCheck(rule) {
+    return function(context) {
+        var onlyLinkMatchingFilenames = context.settings[MATCHING_FILE_SETTINGS_PROPERTY];
+        if (onlyLinkMatchingFilenames && !new RegExp(onlyLinkMatchingFilenames).test(context.getFilename())) {
+            // return empty object to disabled all checks for this file
+            return {};
+        }
+        return rule(context);
+    };
+}
+
 Rule.prototype = {
     requireRule: function() {
-        return this._requireRule;
+        return function(context) {
+            return this._requireRule(context);
+        }.bind(this);
     },
     requireLegacyRule: function() {
-        var self = this;
-        function legacyRule(context) {
-            self.logWarningOnce(context);
-            return self._requireRule(context);
-        }
-        legacyRule.schema = self._requireRule.schema;
+        var legacyRule = function(context) {
+            this.logWarningOnce(context);
+            return this._requireRule(context);
+        }.bind(this);
+
+        legacyRule.schema = this._requireRule.schema;
         return legacyRule;
     },
     getLegacyName: function() {
@@ -46,10 +60,10 @@ module.exports = {
         this.rules.forEach(function(rule) {
             var legacyName = rule.getLegacyName();
 
-            exportObject.rules[rule.name] = rule.requireRule();
+            exportObject.rules[rule.name] = _wrapRuleWithSettingsCheck(rule.requireRule());
             exportObject.rulesConfig[rule.name] = rule.config;
 
-            exportObject.rules[legacyName] = rule.requireLegacyRule();
+            exportObject.rules[legacyName] = _wrapRuleWithSettingsCheck(rule.requireLegacyRule());
             exportObject.rulesConfig[legacyName] = 0;
         });
         return exportObject;

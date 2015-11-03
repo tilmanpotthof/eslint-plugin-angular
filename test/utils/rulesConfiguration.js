@@ -26,6 +26,8 @@ describe('legacy rule', function() {
 });
 
 var eslintTester = new RuleTester();
+
+// rule two check on a legacy rule to test the warning
 eslintTester.run('ng_angularelement', rules.ng_angularelement, {
     valid: [
         'angular.element("#id")'
@@ -33,5 +35,29 @@ eslintTester.run('ng_angularelement', rules.ng_angularelement, {
     invalid: [
         {code: '$( )', errors: [{message: 'You should use angular.element instead of the jQuery $ object'}]}
     ]
+});
+
+
+eslintTester.run('timeout-service', rules['timeout-service'], {
+    valid: [{
+        code: '$timeout()',
+        filename: 'avanger.service.js',
+        settings: {'angular/only-lint-matching-filenames': '\.service\.js$'}
+    }, {
+        code: 'setTimeout()',
+        filename: 'noAngularFile.js',
+        settings: {'angular/only-lint-matching-filenames': '\.service\.js$'}
+    }],
+    invalid: [{
+        code: 'setTimeout()',
+        filename: 'avanger.service.js',
+        settings: {'angular/only-lint-matching-filenames': '\.service\.js$'},
+        errors: [{message: 'You should use the $timeout service instead of the default window.setTimeout method'}]
+    }, {
+        code: 'setTimeout()',
+        filename: 'avanger.directive.js',
+        settings: {'angular/only-lint-matching-filenames': '\.(service|directive)\.js$'},
+        errors: [{message: 'You should use the $timeout service instead of the default window.setTimeout method'}]
+    }]
 });
 
