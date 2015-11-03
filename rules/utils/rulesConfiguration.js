@@ -1,6 +1,5 @@
 'use strict';
 
-var noop = require('lodash').noop;
 var MATCHING_FILE_SETTINGS_PROPERTY = 'angular/only-lint-matching-filenames';
 
 function Rule(name, config) {
@@ -42,7 +41,7 @@ Rule.prototype = {
         /* eslint-disable no-console */
         console.warn('WARNING: Deprecated rule name ' + context.id + ' use angular/' + this.name + ' instead (will be removed in v1.0).');
         /* eslint-enable no-console */
-        this.logWarningOnce = noop;
+        this.logWarningOnce = function() { };
     }
 };
 
