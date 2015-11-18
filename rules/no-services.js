@@ -8,6 +8,8 @@
  *
  * @linkDescription disallow DI of specified services for other angular components (`$http` for controllers, filters and directives)
  * @version 0.1.0
+ * @defaultState 2
+ * @defaultParam ["$http", "$resource", "Restangular", "$q"]
  */
 'use strict';
 

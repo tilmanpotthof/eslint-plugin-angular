@@ -6,6 +6,7 @@
  * This means for example that `_$httpBackend_` goes before `_$http_`.
  *
  * @version 0.6.0
+ * @defaultState 0
  */
 'use strict';
 

@@ -6,6 +6,8 @@
  *
  * @styleguideReference {johnpapa} `y001` Define 1 component per file
  * @version 0.11.0
+ * @defaultState 0
+ * @defaultParam 1
  */
 'use strict';
 

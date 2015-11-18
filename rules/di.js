@@ -4,6 +4,8 @@
  * All your DI should use the same syntax : the Array, function, or $inject syntaxes ("di":  [2, "array, function, or $inject"])
  *
  * @version 0.1.0
+ * @defaultState 2
+ * @defaultParam "function"
  */
 'use strict';
 

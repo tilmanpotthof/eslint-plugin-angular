@@ -41,13 +41,15 @@ function createDocFiles(cb) {
  * @param cb callback
  */
 function updateReadme(readmePath, cb) {
-    var readmeRuleSection = templates.readmeRuleSectionContent(this);
     var readmeContent = fs.readFileSync(readmePath).toString();
+    var newRuleSection = templates.readmeRuleSectionContent(this);
+    var newDefaultsSection = templates.defaultsRuleSectionContent(this);
 
     // use split and join to prevent the replace() and dollar sign problem (http://stackoverflow.com/questions/9423722)
-    var updatedReadmeContent = readmeContent.split(/## Rules[\S\s]*?----\n/).join(readmeRuleSection);
+    readmeContent = readmeContent.split(/## Rules[\S\s]*?----\n/).join(newRuleSection);
+    readmeContent = readmeContent.split(/## Defaults[\S\s]*?----\n/).join(newDefaultsSection);
 
-    fs.writeFileSync(readmePath, updatedReadmeContent);
+    fs.writeFileSync(readmePath, readmeContent);
     (cb || _.noop)();
 }
 
@@ -158,6 +160,8 @@ function _createRule(ruleName) {
     rule.description = mainRuleComment.description.trim();
     rule.linkDescription = mainRuleComment.linkDescription ? mainRuleComment.linkDescription : rule.lead;
     rule.styleguideReferences = mainRuleComment.styleguideReferences || [];
+    rule.defaultState = mainRuleComment.defaultState;
+    rule.defaultParam = mainRuleComment.defaultParam;
     rule.version = mainRuleComment.version;
 
     if (!rule.version) {

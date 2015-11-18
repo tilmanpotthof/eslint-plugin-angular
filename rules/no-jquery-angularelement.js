@@ -3,6 +3,7 @@
  *
  * You should not wrap angular.element object into jQuery(), because angular.element already return jQLite element
  * @version 0.1.0
+ * @defaultState 2
  */
 'use strict';
 

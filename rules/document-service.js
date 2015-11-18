@@ -5,6 +5,7 @@
  *
  * @styleguideReference {johnpapa} `y180` Angular $ Wrapper Services - $document and $window
  * @version 0.1.0
+ * @defaultState 2
  */
 'use strict';
 

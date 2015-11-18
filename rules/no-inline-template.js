@@ -6,6 +6,8 @@
  * ('no-inline-template': [0, {allowSimple: true}])
  *
  * @version 0.12.0
+ * @defaultState 0
+ * @defaultParam {"allow-simple": true}
  */
 'use strict';
 

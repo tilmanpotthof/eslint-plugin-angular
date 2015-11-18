@@ -5,6 +5,7 @@
  * So you can remove angular.mock from your code
  *
  * @version 0.2.0
+ * @defaultState 0
  */
 'use strict';
 

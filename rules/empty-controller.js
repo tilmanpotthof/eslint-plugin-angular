@@ -5,6 +5,7 @@
  * You can remove this declaration because this controller is useless
  *
  * @version 0.1.0
+ * @defaultState 0
  */
 'use strict';
 

@@ -4,6 +4,7 @@
  * Injected dependencies should be written one per line.
  *
  * @version 0.14.0
+ * @defaultState 0
  */
 'use strict';
 

@@ -4,6 +4,7 @@
  * You should use the angular.forEach method instead of the default JavaScript implementation [].forEach.
  *
  * @version 0.1.0
+ * @defaultState 0
  */
 'use strict';
 
