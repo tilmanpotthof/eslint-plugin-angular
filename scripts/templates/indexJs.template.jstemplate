@@ -1,0 +1,15 @@
+// This file is generated. To edit settings edit the comments in the rules files
+
+'use strict';
+
+var rulesConfiguration = require('./rules/utils/rulesConfiguration.js');
+
+<% _.each(rules, function (rule) { %>
+rulesConfiguration.addRule('<%= rule.ruleName %>', <%
+        if (rule.defaultParam) {%>[<% }
+        %><%= rule.defaultState %><%
+        if (rule.defaultParam) {%>, <%= rule.defaultParam.replace(/"/mg, "'").replace(/'(\w+)':/mg, "$1:") %>]<% }
+        %>);<%
+        }) %>
+
+module.exports = rulesConfiguration.moduleExports();

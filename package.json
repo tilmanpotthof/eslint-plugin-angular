@@ -21,6 +21,7 @@
     "coveralls": "^2.11.4",
     "eslint": "^1.8.0",
     "espree": "^2.2.5",
+    "glob": "^6.0.1",
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.0.0",
     "gulp-istanbul": "^0.10.2",

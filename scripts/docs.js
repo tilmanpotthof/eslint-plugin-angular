@@ -3,14 +3,13 @@
 var fs = require('fs');
 var parseComments = require('parse-comments');
 var _ = require('lodash');
-var eslintAngularIndex = require('../index.js');
 var RuleTester = require('eslint').RuleTester;
+var glob = require('glob');
 
 var templates = require('./templates.js');
 
-var ruleNames = Object.keys(eslintAngularIndex.rules).filter(function(ruleName) {
-    // filter legacy rules
-    return !/^ng_/.test(ruleName);
+var ruleNames = _.map(glob.sync('./rules/*.js'), function(filePath) {
+    return filePath.replace(/^.\/rules\/(.*).js.*$/mg, '$1');
 });
 
 // create rule documentation objects from ruleNames
@@ -20,6 +19,7 @@ module.exports = {
     rules: rules,
     createDocFiles: createDocFiles,
     updateReadme: updateReadme,
+    updateIndexJs: updateIndexJs,
     testDocs: testDocs
 };
 
@@ -51,6 +51,11 @@ function updateReadme(readmePath, cb) {
 
     fs.writeFileSync(readmePath, readmeContent);
     (cb || _.noop)();
+}
+
+function updateIndexJs(filePath) {
+    var content = templates.indexJs(this);
+    fs.writeFileSync(filePath, content);
 }
 
 /**
@@ -105,12 +110,9 @@ function _parseExample(exampleSource) {
     // use options for tests or default options of no options are configured
     if (example.options) {
         example.displayOptions = example.options;
-    } else {
+    } else if (rule.defaultParam) {
         // set default options for tests
-        var defaultOptions = eslintAngularIndex.rulesConfig[rule.ruleName];
-        if (_.isArray(defaultOptions)) {
-            example.options = defaultOptions.slice(1);
-        }
+        example.options = [JSON.parse(rule.defaultParam)];
     }
 
     return example;

@@ -99,16 +99,16 @@ Users may use the shareable [eslint-config-angular](https://github.com/dustinspe
     "rules": {
         "angular/angularelement": 1,
         "angular/component-limit": [0, 1],
-        "angular/controller-as": 2,
         "angular/controller-as-route": 2,
         "angular/controller-as-vm": [2, "vm"],
+        "angular/controller-as": 2,
         "angular/controller-name": [2, "/[A-Z].*Controller$/"],
         "angular/deferred": 0,
         "angular/definedundefined": 2,
-        "angular/di": [2, "function"],
         "angular/di-order": 0,
         "angular/di-unused": 0,
-        "angular/directive-name": [0, true],
+        "angular/di": [2, "function"],
+        "angular/directive-name": 0,
         "angular/directive-restrict": 0,
         "angular/document-service": 2,
         "angular/empty-controller": 0,
@@ -131,8 +131,8 @@ Users may use the shareable [eslint-config-angular](https://github.com/dustinspe
         "angular/no-inline-template": [0, {"allow-simple": true}],
         "angular/no-jquery-angularelement": 2,
         "angular/no-private-call": 2,
-        "angular/no-services": [2, ["$http", "$resource", "Restangular", "$q"]],
         "angular/no-service-method": 2,
+        "angular/no-services": [2, ["$http", "$resource", "Restangular", "$q"]],
         "angular/on-watch": 2,
         "angular/one-dependency-per-line": 0,
         "angular/rest-service": 0,
@@ -158,15 +158,15 @@ Users may use the shareable [eslint-config-angular](https://github.com/dustinspe
 
  * [angularelement](docs/angularelement.md) - use `angular.element` instead of `$` or `jQuery`
  * [component-limit](docs/component-limit.md) - limit the number of angular components per file
- * [controller-as](docs/controller-as.md) - disallow assignments to `$scope` in controllers
  * [controller-as-route](docs/controller-as-route.md) - require the use of controllerAs in routes or states
  * [controller-as-vm](docs/controller-as-vm.md) - require and specify a capture variable for `this` in controllers
+ * [controller-as](docs/controller-as.md) - disallow assignments to `$scope` in controllers
  * [controller-name](docs/controller-name.md) - require and specify a prefix for all controller names
  * [deferred](docs/deferred.md) - use `$q(function(resolve, reject){})` instead of `$q.deferred`
  * [definedundefined](docs/definedundefined.md) - use `angular.isDefined` and `angular.isUndefined` instead of other undefined checks
- * [di](docs/di.md) - require a consistent DI syntax
  * [di-order](docs/di-order.md) - require DI parameters to be sorted alphabetically
  * [di-unused](docs/di-unused.md) - disallow unused DI parameters
+ * [di](docs/di.md) - require a consistent DI syntax
  * [directive-name](docs/directive-name.md) - require and specify a prefix for all directive names
  * [directive-restrict](docs/directive-restrict.md) - disallow any other directive restrict than 'A' or 'E'
  * [document-service](docs/document-service.md) - use `$document` instead of `document`
@@ -190,8 +190,8 @@ Users may use the shareable [eslint-config-angular](https://github.com/dustinspe
  * [no-inline-template](docs/no-inline-template.md) - disallow the use of inline templates
  * [no-jquery-angularelement](docs/no-jquery-angularelement.md) - disallow to wrap `angular.element` objects with `jQuery` or `$`
  * [no-private-call](docs/no-private-call.md) - disallow use of internal angular properties prefixed with $$
- * [no-services](docs/no-services.md) - disallow DI of specified services for other angular components (`$http` for controllers, filters and directives)
  * [no-service-method](docs/no-service-method.md) - use `factory()` instead of `service()`
+ * [no-services](docs/no-services.md) - disallow DI of specified services for other angular components (`$http` for controllers, filters and directives)
  * [on-watch](docs/on-watch.md) - require `$on` and `$watch` deregistration callbacks to be saved in a variable
  * [one-dependency-per-line](docs/one-dependency-per-line.md) - require all DI parameters to be located in their own line
  * [rest-service](docs/rest-service.md) - disallow different rest service and specify one of '$http', '$resource', 'Restangular'

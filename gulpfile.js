@@ -31,6 +31,7 @@ gulp.task('docs', function(cb) {
     docs.updateReadme('README.md');
     docs.createDocFiles();
     docs.testDocs(cb);
+    docs.updateIndexJs('index.js');
 });
 
-gulp.task('default', ['quality', 'docs', 'test']);
+gulp.task('default', ['docs', 'quality', 'test']);

@@ -1,18 +1,21 @@
+// This file is generated. To edit settings edit the comments in the rules files
+
 'use strict';
 
 var rulesConfiguration = require('./rules/utils/rulesConfiguration.js');
 
+
 rulesConfiguration.addRule('angularelement', 1);
 rulesConfiguration.addRule('component-limit', [0, 1]);
-rulesConfiguration.addRule('controller-as', 2);
 rulesConfiguration.addRule('controller-as-route', 2);
 rulesConfiguration.addRule('controller-as-vm', [2, 'vm']);
-rulesConfiguration.addRule('controller-name', [2, /[A-Z].*Controller$/]);
+rulesConfiguration.addRule('controller-as', 2);
+rulesConfiguration.addRule('controller-name', [2, '/[A-Z].*Controller$/']);
 rulesConfiguration.addRule('deferred', 0);
 rulesConfiguration.addRule('definedundefined', 2);
-rulesConfiguration.addRule('di', [2, 'function']);
 rulesConfiguration.addRule('di-order', 0);
 rulesConfiguration.addRule('di-unused', 0);
+rulesConfiguration.addRule('di', [2, 'function']);
 rulesConfiguration.addRule('directive-name', 0);
 rulesConfiguration.addRule('directive-restrict', 0);
 rulesConfiguration.addRule('document-service', 2);
@@ -36,8 +39,8 @@ rulesConfiguration.addRule('no-http-callback', 0);
 rulesConfiguration.addRule('no-inline-template', [0, {'allow-simple': true}]);
 rulesConfiguration.addRule('no-jquery-angularelement', 2);
 rulesConfiguration.addRule('no-private-call', 2);
-rulesConfiguration.addRule('no-services', [2, ['$http', '$resource', 'Restangular', '$q']]);
 rulesConfiguration.addRule('no-service-method', 2);
+rulesConfiguration.addRule('no-services', [2, ['$http', '$resource', 'Restangular', '$q']]);
 rulesConfiguration.addRule('on-watch', 2);
 rulesConfiguration.addRule('one-dependency-per-line', 0);
 rulesConfiguration.addRule('rest-service', 0);
