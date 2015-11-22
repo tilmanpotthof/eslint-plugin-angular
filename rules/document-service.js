@@ -1,8 +1,10 @@
 /**
- * Instead of the default document object, you should prefer the AngularJS wrapper service $document.
- * [Y180](https://github.com/johnpapa/angular-styleguide#style-y180)
+ * use `$document` instead of `document`
  *
- * @linkDescription use `$document` instead of `document`
+ * Instead of the default document object, you should prefer the AngularJS wrapper service $document.
+ *
+ * @styleguideReference {johnpapa} `y180` Angular $ Wrapper Services - $document and $window
+ * @version 0.1.0
  */
 'use strict';
 

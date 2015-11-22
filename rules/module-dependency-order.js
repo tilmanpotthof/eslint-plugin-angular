@@ -1,4 +1,6 @@
 /**
+ * require a consistent order of module dependencies
+ *
  * Module dependencies should be sorted in a logical manner.
  * This rule provides two ways to sort modules, grouped or ungrouped.
  * In grouped mode the modules should be grouped in the order: standard modules - third party modules - custom modules.
@@ -7,7 +9,7 @@
  * Without grouped set to `false` all dependencies combined should be sorted alphabetically.
  * ('module-dependency-order', [2, {grouped: true, prefix: "app"}])
  *
- * @linkDescription require a consistent order of module dependencies
+ * @version 0.12.0
  */
 'use strict';
 
@@ -171,7 +173,7 @@ module.exports.schema = [{
             type: 'boolean'
         },
         prefix: {
-            type: 'string'
+            type: ['string', 'null']
         }
     }
 }];

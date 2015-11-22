@@ -1,7 +1,10 @@
 /**
- * You should prefer the factory() method instead of service() [Y040](https://github.com/johnpapa/angular-styleguide#style-y040)
+ * use `factory()` instead of `service()`
  *
- * @linkDescription use `factory()` instread of `service()`
+ * You should prefer the factory() method instead of service()
+ *
+ * @styleguideReference {johnpapa} `y040` Services - Singletons
+ * @version 0.1.0
  */
 'use strict';
 
@@ -11,12 +14,7 @@ module.exports = function(context) {
     return {
 
         CallExpression: function(node) {
-            var prefix = context.options[0];
-            if (prefix === undefined) {
-                return;
-            }
-
-            if (utils.isAngularComponent(node) && node.callee.property.name === 'service') {
+            if (utils.isAngularComponent(node) && node.callee.property && node.callee.property.name === 'service') {
                 context.report(node, 'You should prefer the factory() method instead of service()', {});
             }
         }

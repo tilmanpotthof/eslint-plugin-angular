@@ -1,8 +1,10 @@
 /**
- * You should use Angular's controllerAs syntax when defining routes or states.
- * Implements route part [Y031](https://github.com/johnpapa/angular-styleguide#style-y031)
+ * require the use of controllerAs in routes or states
  *
- * @linkDescription require the use of controllerAs in routes or states
+ * You should use Angular's controllerAs syntax when defining routes or states.
+ *
+ * @styleguideReference {johnpapa} `y031` controllerAs Controller Syntax
+ * @version 0.1.0
  */
 'use strict';
 

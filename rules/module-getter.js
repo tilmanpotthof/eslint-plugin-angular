@@ -1,7 +1,11 @@
 /**
- * When using a module, avoid using a variable and instead use chaining with the getter syntax [Y022](https://github.com/johnpapa/angular-styleguide#style-y022)
+ * enforce to reference modules with the getter syntax
+ *
+ * When using a module, avoid using a variable and instead use chaining with the getter syntax
  *
  * @linkDescription disallow to reference modules with variables and require to use the getter syntax instead `angular.module('myModule')`
+ * @styleguideReference {johnpapa} `y022` Module - Getters
+ * @version 0.1.0
  */
 'use strict';
 

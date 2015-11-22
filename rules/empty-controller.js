@@ -1,8 +1,10 @@
 /**
+ * disallow empty controllers
+ *
  * If you have one empty controller, maybe you have linked it in your Router configuration or in one of your views.
  * You can remove this declaration because this controller is useless
  *
- * @linkDescription disallow empty controllers
+ * @version 0.1.0
  */
 'use strict';
 

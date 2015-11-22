@@ -6,6 +6,7 @@
 
 var rule = require('../rules/di');
 var RuleTester = require('eslint').RuleTester;
+var commonFalsePositives = require('./utils/commonFalsePositives');
 
 
 var angularNamedObjectList = ['value', 'factory', 'service', 'provider', 'controller', 'filter', 'directive'];
@@ -28,6 +29,21 @@ angularObjectList.forEach(function(object) {
     }, {
         code: 'angular.' + object + '(myFunction);function MyFunction() {}',
         options: ['function']
+    }, {
+        code: 'angular.' + object + '(myFunction);myFunction.$inject=[];function myFunction() {}',
+        options: ['$inject']
+    }, {
+        code: 'angular.' + object + '(myFunction);myFunction["$inject"]=[];function myFunction() {}',
+        options: ['$inject']
+    }, {
+        code: 'myFunction.$inject=[];function myFunction() {} angular.' + object + '(myFunction);',
+        options: ['$inject']
+    }, {
+        code: 'function myFunction() {} myFunction.$inject=[];angular.' + object + '(myFunction);',
+        options: ['$inject']
+    }, {
+        code: 'var myFunction = function() {}; myFunction.$inject=[];angular.' + object + '(myFunction);',
+        options: ['$inject']
     });
 
     invalid.push({
@@ -46,6 +62,22 @@ angularObjectList.forEach(function(object) {
         code: 'angular.' + object + '([function(Service1) {}]);',
         options: ['array'],
         errors: [{message: 'The signature of the method is incorrect'}]
+    }, {
+        code: 'angular.' + object + '(myFunction); function myFunction() {}',
+        options: ['$inject'],
+        errors: [{message: 'You should use the $inject syntax for DI'}]
+    }, {
+        code: 'function myFunction() {} angular.' + object + '(myFunction);',
+        options: ['$inject'],
+        errors: [{message: 'You should use the $inject syntax for DI'}]
+    }, {
+        code: 'var myFunction = function() {};angular.' + object + '(myFunction);',
+        options: ['$inject'],
+        errors: [{message: 'You should use the $inject syntax for DI'}]
+    }, {
+        code: 'angular.' + object + '(function() {});',
+        options: ['$inject'],
+        errors: [{message: 'You should use the $inject syntax for DI'}]
     });
 });
 
@@ -62,6 +94,18 @@ angularNamedObjectList.forEach(function(object) {
     }, {
         code: 'angular.' + object + '("name", myFunction);function MyFunction() {}',
         options: ['function']
+    }, {
+        code: 'angular.' + object + '("name", myFunction);myFunction.$inject=[];function myFunction() {}',
+        options: ['$inject']
+    }, {
+        code: 'myFunction.$inject=[];function myFunction() {} angular.' + object + '("name", myFunction);',
+        options: ['$inject']
+    }, {
+        code: 'function myFunction() {} myFunction.$inject=[];angular.' + object + '("name", myFunction);',
+        options: ['$inject']
+    }, {
+        code: 'var myFunction = function() {}; myFunction.$inject=[];angular.' + object + '("name", myFunction);',
+        options: ['$inject']
     });
 
     invalid.push({
@@ -80,6 +124,22 @@ angularNamedObjectList.forEach(function(object) {
         code: 'angular.' + object + '("name", [function(Service1) {}]);',
         options: ['array'],
         errors: [{message: 'The signature of the method is incorrect'}]
+    }, {
+        code: 'angular.' + object + '("name", myFunction); function myFunction() {}',
+        options: ['$inject'],
+        errors: [{message: 'You should use the $inject syntax for DI'}]
+    }, {
+        code: 'function myFunction() {} angular.' + object + '("name", myFunction);',
+        options: ['$inject'],
+        errors: [{message: 'You should use the $inject syntax for DI'}]
+    }, {
+        code: 'var myFunction = function () {};angular.' + object + '("name", myFunction);',
+        options: ['$inject'],
+        errors: [{message: 'You should use the $inject syntax for DI'}]
+    }, {
+        code: 'angular.' + object + '("name", function() {});',
+        options: ['$inject'],
+        errors: [{message: 'You should use the $inject syntax for DI'}]
     });
 });
 
@@ -100,6 +160,6 @@ valid.push({
 
 var eslintTester = new RuleTester();
 eslintTester.run('di', rule, {
-    valid: valid,
+    valid: valid.concat(commonFalsePositives),
     invalid: invalid
 });

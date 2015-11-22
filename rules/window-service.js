@@ -1,8 +1,10 @@
 /**
- * Instead of the default window object, you should prefer the AngularJS wrapper service $window.
- * [Y180](https://github.com/johnpapa/angular-styleguide#style-y180)
+ * use `$window` instead of `window`
  *
- * @linkDescription use `$window` instead of `window`
+ * Instead of the default window object, you should prefer the AngularJS wrapper service $window.
+ *
+ * @styleguideReference {johnpapa} `y180` Angular $ Wrapper Services - $document and $window
+ * @version 0.1.0
  */
 'use strict';
 

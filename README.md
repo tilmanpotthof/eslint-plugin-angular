@@ -18,7 +18,6 @@ Since the 0.0.4 release, some rules defined in [John Papa's Guideline](https://g
 
 - [Usage with shareable config](#usage-with-shareable-config)
 - [Usage without shareable config](#usage-without-shareable-config)
-- [Sample configs](sample-configs)
 - [Defaults](#defaults)
 - [Rules](#rules)
 - [Need your help](#need-your-help)
@@ -90,14 +89,6 @@ Users may use the shareable [eslint-config-angular](https://github.com/dustinspe
 
 
 
-## Sample configs
-
-- [demo/npm](https://github.com/Gillespie59/eslint-plugin-angular/tree/master/demo/npm) (launch: npm run lint)
-- [demo/grunt](https://github.com/Gillespie59/eslint-plugin-angular/tree/master/demo/grunt) (launch: grunt)
-- [demo/gulp](https://github.com/Gillespie59/eslint-plugin-angular/tree/master/demo/gulp) (launch: gulp)
-
-
-
 ## Defaults
 
 ```json
@@ -142,6 +133,7 @@ Users may use the shareable [eslint-config-angular](https://github.com/dustinspe
         "angular/no-service-method": 2,
         "angular/no-services": [2, ["$http", "$resource", "Restangular"]],
         "angular/on-watch": 2,
+        "angular/one-dependency-per-line": 0,
         "angular/rest-service": 0,
         "angular/service-name": 2,
         "angular/timeout-service": 2,
@@ -162,8 +154,9 @@ Users may use the shareable [eslint-config-angular](https://github.com/dustinspe
 
 ## Rules
 
+
  * [angularelement](docs/angularelement.md) - use `angular.element` instead of `$` or `jQuery`
- * [component-limit](docs/component-limit.md) - limits the number of angular components per file
+ * [component-limit](docs/component-limit.md) - limit the number of angular components per file
  * [controller-as](docs/controller-as.md) - disallow assignments to `$scope` in controllers
  * [controller-as-route](docs/controller-as-route.md) - require the use of controllerAs in routes or states
  * [controller-as-vm](docs/controller-as-vm.md) - require and specify a capture variable for `this` in controllers
@@ -197,8 +190,9 @@ Users may use the shareable [eslint-config-angular](https://github.com/dustinspe
  * [no-jquery-angularelement](docs/no-jquery-angularelement.md) - disallow to wrap `angular.element` objects with `jQuery` or `$`
  * [no-private-call](docs/no-private-call.md) - disallow use of internal angular properties prefixed with $$
  * [no-services](docs/no-services.md) - disallow DI of specified services for other angular components (`$http` for controllers, filters and directives)
- * [no-service-method](docs/no-service-method.md) - use `factory()` instread of `service()`
+ * [no-service-method](docs/no-service-method.md) - use `factory()` instead of `service()`
  * [on-watch](docs/on-watch.md) - require `$on` and `$watch` deregistration callbacks to be saved in a variable
+ * [one-dependency-per-line](docs/one-dependency-per-line.md) - require all DI parameters to be located in their own line
  * [rest-service](docs/rest-service.md) - disallow different rest service and specify one of '$http', '$resource', 'Restangular'
  * [service-name](docs/service-name.md) - require and specify a prefix for all service names
  * [timeout-service](docs/timeout-service.md) - use `$timeout` instead of `setTimeout`
@@ -207,11 +201,12 @@ Users may use the shareable [eslint-config-angular](https://github.com/dustinspe
  * [typecheck-function](docs/typecheck-function.md) - use `angular.isFunction` instead of `typeof` comparisons
  * [typecheck-number](docs/typecheck-number.md) - use `angular.isNumber` instead of `typeof` comparisons
  * [typecheck-object](docs/typecheck-object.md) - use `angular.isObject` instead of `typeof` comparisons
- * [typecheck-regexp](docs/typecheck-regexp.md) - use `angular.isRegexp` instead of other comparisons
+ * [typecheck-regexp](docs/typecheck-regexp.md) - DEPRECATED! use `angular.isRegexp` instead of other comparisons (no native angular method)
  * [typecheck-string](docs/typecheck-string.md) - use `angular.isString` instead of `typeof` comparisons
  * [watchers-execution](docs/watchers-execution.md) - require and specify consistent use `$scope.digest()` or `$scope.apply()`
  * [window-service](docs/window-service.md) - use `$window` instead of `window`
 
+----
 
 
 ## Need your help
@@ -225,7 +220,9 @@ It is an opensource project. Any help will be very useful. You can :
 - Improve the quality
 - Reply to issues
 
-All contributions should be pushed in the current GIT branch.
+All development happens on the `development` branch. This means all pull requests should be made to the `development` branch.
+
+If it is time to release, @Gillespie59 will bump the version in `package.json`, create a Git tag and merge the `development` branch into `master`. @Gillespie59 will then publish the new release to the npm registry.
 
 
 
