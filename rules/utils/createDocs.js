@@ -2,15 +2,8 @@
 
 var fs = require('fs');
 var eslintAngularIndex = require('../../index.js');
-var testUtils = require('../../test/utils/testUtils.js');
-
 
 var readmeContent = fs.readFileSync('README.md').toString();
-
-var ruleFiles = testUtils.getFiles({
-    basePath: './rules/',
-    ignoreFiles: ['index.js', 'utils']
-});
 
 var ruleNames = Object.keys(eslintAngularIndex.rules).filter(function(ruleName) {
     // filter legacy rules
@@ -19,11 +12,11 @@ var ruleNames = Object.keys(eslintAngularIndex.rules).filter(function(ruleName) 
 
 var documentedRules = [];
 
-readmeContent.split('\n').forEach(function (readmeContentLine) {
+readmeContent.split('\n').forEach(function(readmeContentLine) {
     var match = /^\|\s*([\w|-]+)\s*\|\s*(.*)\s*\|$/g.exec(readmeContentLine);
     if (match) {
         var ruleName = match[1];
-        var description = match[2]
+        var description = match[2];
         if (ruleName !== 'Name' && ruleName !== '-------------') {
             documentedRules.push({
                 ruleName: ruleName,
@@ -36,7 +29,7 @@ readmeContent.split('\n').forEach(function (readmeContentLine) {
 console.log('ruleNames.length', ruleNames.length);
 console.log('documentedRules.length', documentedRules.length);
 
-documentedRules.forEach(function (rule) {
+documentedRules.forEach(function(rule) {
     var ruleSourcePath = 'rules/' + rule.ruleName + '.js';
     var descriptionLines = rule.description.trim().split(/\.\s+/g);
     var formattedDescriptions = descriptionLines.join('.\n');
@@ -51,4 +44,3 @@ documentedRules.forEach(function (rule) {
     var ruleSourceCotentWithDocumentation = ruleDocumentationComment + ruleSourceContent;
     fs.writeFileSync(ruleSourcePath, ruleSourceCotentWithDocumentation);
 });
-
