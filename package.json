@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-angular",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "ESLint rules for AngularJS projects",
   "main": "index.js",
   "scripts": {
@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Gillespie59/eslint-plugin-angularjs",
   "devDependencies": {
     "chai": "^3.4.0",
+    "chai-spies": "^0.7.1",
     "coveralls": "^2.11.4",
     "eslint": "^1.8.0",
     "espree": "^2.2.5",
